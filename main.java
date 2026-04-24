@@ -1,22 +1,24 @@
 public class main {
-  public static int binarySearch(int[] arr,int target){
-    int left = 0;
-    int right = arr.length-1;
-    while(left <= right){
-      int mid = left + (right-left) /2 ;
-      if(target ==  arr[mid]){
-        return mid;
-      }
-      if(arr[mid] < target){
-         left = mid + 1;
-      }else{
-        right = mid- 1;
-      }
+    public static void main(String[] args) {
+        int[] array = {23, 1, 65, 7, 43, 99, 10, 89, 12};
+
+        int[] sortedArray = bubbleSort(array);
+
+        for (int k = 0; k < sortedArray.length; k++) {
+            System.out.println(sortedArray[k]);
+        }
     }
-    return -1;
-  }
-  public static void main(String[] args) {
-    int[] arr = {2,4,6,8,10,12};
-    System.out.println(binarySearch(arr,1));
-  }
+
+    public static int[] bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                }
+            }
+        }
+        return arr;
+    }
 }
