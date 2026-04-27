@@ -1,6 +1,5 @@
-public class main {
-
-    public static void main(String[] args) {
+public class SelectionSort {
+     public static void main(String[] args) {
 
         int[] list = {23, 54, 2, 65, 1, 9, 98, 23, 77, 90, 3, 41};
 
