@@ -1,40 +1,44 @@
-public class main {
+class main {
 
     public static void main(String[] args) {
-        int[] list = {23, 54, 2, 65, 1, 9, 98, 23, 77, 90, 3, 41};
-        quickSort(list, 0, list.length - 1);
+        int[] a = {12, 11, 13, 5, 6, 7};
 
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
-        }
+        int[] sorted = sort(a);
+
+        for (int num : sorted)
+            System.out.print(num + " ");
     }
 
-    public static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pivot = partition(arr, low, high);
-            quickSort(arr, low, pivot - 1);
-            quickSort(arr, pivot + 1, high); // FIXED
-        }
+    public static int[] sort(int[] a) {
+        if (a.length <= 1) return a;
+
+        int mid = a.length / 2;
+
+        int[] left = new int[mid];
+        int[] right = new int[a.length - mid];
+
+        for (int i = 0; i < mid; i++) left[i] = a[i];
+        for (int i = mid; i < a.length; i++) right[i - mid] = a[i];
+
+        left = sort(left);
+        right = sort(right);
+
+        return merge(left, right);
     }
 
-    public static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int k = low - 1;
+    public static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
 
-        for (int i = low; i < high; i++) { // FIXED
-            if (arr[i] < pivot) {
-                k++;
-                int temp = arr[i];
-                arr[i] = arr[k];
-                arr[k] = temp;
-            }
+        int i = 0, j = 0, k = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) result[k++] = left[i++];
+            else result[k++] = right[j++];
         }
 
-        k++;
-        int temp = arr[high];
-        arr[high] = arr[k];
-        arr[k] = temp;
+        while (i < left.length) result[k++] = left[i++];
+        while (j < right.length) result[k++] = right[j++];
 
-        return k;
+        return result;
     }
 }
